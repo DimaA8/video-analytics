@@ -1,11 +1,18 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import videoReducer from '../features/video/videoSlice';
+import createSagaMiddleware from 'redux-saga';
+import { videoSaga } from '../features/video/videoSaga';
 
+const saga = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    video: videoReducer,
+  },
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(saga);
   },
 });
+saga.run(videoSaga);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
