@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { SyntheticEvent, useCallback, useEffect, useRef, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { VideoEventType, fetchEvents } from 'features/video/videoSlice';
 import { VideoEvent } from '../VideoEvent';
@@ -56,6 +56,9 @@ export const Video = ({ src }: VideoProps) => {
       /> : null
   })
 
+  const handleSeeking = (event: SyntheticEvent<HTMLVideoElement>) => {
+    setCurrentTime(event.currentTarget.currentTime * 1000);
+  }
   return (
     <div className="video">
       <div className="video__player-wrapper">
@@ -63,6 +66,7 @@ export const Video = ({ src }: VideoProps) => {
           data-testid="video"
           className="video__player"
           ref={player}
+          onSeeking={handleSeeking}
           src={src} 
           controls
         />
