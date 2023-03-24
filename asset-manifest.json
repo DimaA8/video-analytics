@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/video-analytics/static/css/main.95ba2149.css",
-    "main.js": "/video-analytics/static/js/main.dd0d687c.js",
+    "main.js": "/video-analytics/static/js/main.fdbd7fd0.js",
     "static/js/787.726b67c7.chunk.js": "/video-analytics/static/js/787.726b67c7.chunk.js",
     "index.html": "/video-analytics/index.html",
     "main.95ba2149.css.map": "/video-analytics/static/css/main.95ba2149.css.map",
-    "main.dd0d687c.js.map": "/video-analytics/static/js/main.dd0d687c.js.map",
+    "main.fdbd7fd0.js.map": "/video-analytics/static/js/main.fdbd7fd0.js.map",
     "787.726b67c7.chunk.js.map": "/video-analytics/static/js/787.726b67c7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.95ba2149.css",
-    "static/js/main.dd0d687c.js"
+    "static/js/main.fdbd7fd0.js"
   ]
 }
