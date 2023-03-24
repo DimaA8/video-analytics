@@ -14,9 +14,25 @@ type VideoProps = {
 }
 export const Video = ({ src }: VideoProps) => {
   const [currentTime, setCurrentTime] = useState(0);
+  const [ratio, setRatio] = useState(0);
   const events = useAppSelector((state) => state.video.events);
   const dispatch = useAppDispatch();
   const player = useRef<HTMLVideoElement>(null);
+
+  const calcRatio = () => {
+    if (player.current) {
+      setRatio(player.current.clientWidth / player.current.videoWidth);
+    }
+  }
+
+  useEffect(() => {
+    player.current?.addEventListener('canplay', calcRatio)
+    window.addEventListener('resize', calcRatio);
+
+    return () => {
+      window.removeEventListener('resize', calcRatio);
+    }
+  }, [player])
 
   useEffect(() => {
     dispatch(fetchEvents());
@@ -29,7 +45,7 @@ export const Video = ({ src }: VideoProps) => {
     return () => {
       clearInterval(interval);
     }
-  }, [])
+  }, [dispatch])
 
   const eventClick = useCallback((timestamp: number) => {
     setCurrentTime(timestamp);
@@ -52,7 +68,10 @@ export const Video = ({ src }: VideoProps) => {
     return isActiveEvent(currentTime, event) ?
       <VideoZone
         key={event.timestamp}
-        {...event.zone}
+        top={event.zone.top * ratio}
+        left={event.zone.left * ratio}
+        width={event.zone.width * ratio}
+        height={event.zone.height * ratio}
       /> : null
   })
 
